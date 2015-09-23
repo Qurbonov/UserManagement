@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>User Management</title>
+    <link href="/static/resources/css/bootstrap.css" th:href="@{/static/resources/css/bootstrap.css}" rel="stylesheet"
+          media="screen" />
+    <!--<link href="/static/resources/css/bootstrap-theme.css" th:href="@{/resources/css/bootstrap-theme.css}"-->
+    <!--rel="stylesheet" media="screen" />-->
+    <link href="/static/resources/css/login.css" th:href="@{/resources/css/login.css}" rel="stylesheet"
+          media="screen" />
+    <link href="/static/resources/css/mystyle.css" th:href="@{/resources/css/mystyle.css}" rel="stylesheet"
+          media="screen" />
+    <script src="/static/resources/js/jquery.js" th:src="@{/resources/js/jquery.js}"></script>
+    <script src="/static/resources/js/bootstrap.js" th:src="@{/resources/js/bootstrap.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div th:class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">Управление пользователей систем</a>
+            <a href="#"> </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/home}">Главная</a></li>
+                <li><a th:href="@{/about}">О Проекте</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle active" data-toggle="dropdown" href="#">
+                        <span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/userprofile}">Профайл</a></li>
+                        <li><a th:href="@{/logout}">Выход</a></li>
+                    </ul>
+                </li>
+
+                <li><a></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div layout:fragment="content"></div>
+</div>
+<script>
+    $(function () {
+        $('.delete').click(function (e) {
+            e.preventDefault();
+            var $target = $(e.target);
+            $.ajax({
+                method: 'DELETE',
+                url: $target.data('url')
+            }).success(function () {
+                var remove = $target.data('remove');
+                if (remove) {
+                    $('#' + remove).remove();
+                }
+            }).error(function () {
+                alert('error deleting...');
+            });
+        })
+    })
+</script>
+<script layout:fragment="script"></script>
+</body>
+</html>

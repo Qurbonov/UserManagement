@@ -1,0 +1,29 @@
+button {
+    margin-bottom: 10px;
+}
+
+form.login {
+    background-color: #fcfcfc;
+    border: solid thin #cdcdcd;
+    height: 300px;
+    width: 360px;
+    margin: 250px auto;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+form.login img.logo {
+    margin-bottom: 25px;
+    max-width: 250px;
+}
+
+form.login button {
+    width: 100%;
+    height: 32px;
+    margin-top: 8px;
+}
+
+.field {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}

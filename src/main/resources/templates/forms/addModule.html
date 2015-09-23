@@ -1,0 +1,33 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="layout">
+    <div layout:fragment="content">
+        <div class="container">
+            <form method="post" role="form" id="save" th:object="${module}">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <span th:text="${addmodule}"></span>
+                            <a th:href="@{/modules}" class="pull-right">Назад</a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 form-group">
+                                    <label for="name">Название модуля</label>
+                                    <input type="text" class="form-control" id="name" th:field="*{moduleName}" />
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    <label for="summary">Краткое описание</label>
+                                    <textarea id="summary" class="form-control" th:field="*{description}"></textarea>
+                                </div>
+                                <div class="col-xs-12 text-right">
+                                    <input type="submit" value="Сохранить" class="btn btn-info" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

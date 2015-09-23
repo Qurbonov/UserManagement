@@ -1,0 +1,81 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="layout">
+    <div layout:fragment="content">
+        <div class="container">
+            <form method="post" autocomplete="off" role="form" id="save" th:object="${user}">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <span th:text="${adduser}"></span>
+                            <a th:href="@{/users}" class="pull-right">Назад</a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 form-group">
+                                    <label for="loginname">Логин</label>
+                                    <input type="text" class="form-control" id="loginname" th:field="*{username}" />
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    <label for="password">Пароль</label>
+                                    <input type="password" class="form-control" id="password" th:field="*{password}" />
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    <label for="firstname">Имя:</label>
+                                    <input type="text" class="form-control" id="firstname" th:field="*{firstname}" />
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    <label for="lastname">Фамилия:</label>
+                                    <input type="text" class="form-control" id="lastname" th:field="*{lastname}" />
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    <label for="department">Отдел</label>
+                                    <input type="text" class="form-control" id="department" th:field="*{department}" />
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    <label for="modulename">Название модуля</label>
+                                    <input type="text" class="form-control" id="modulename" th:field="*{module}" />
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label for="userType">Тип</label>
+
+                                    <div class="col-xs-12 input-group">
+                                        <select id="userType" class="form-control" th:field="*{userType}">
+                                            <option value="Администратор">Администратор</option>
+                                            <option value="Пользователь">Пользователь</option>
+                                        </select>
+
+                                        <!--<div class="col-xs-6 form-group">-->
+                                        <!--<div class="checkbox thumbnail text-center">-->
+                                        <!--<label>-->
+                                        <!--<input type="checkbox" value="" name="admin" id="admin"/>-->
+                                        <!--Администратор-->
+                                        <!--</label>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-xs-6 form-group">-->
+                                        <!--<div class="checkbox thumbnail text-center">-->
+                                        <!--<label>-->
+                                        <!--<input type="checkbox" value="" />-->
+                                        <!--Пользователь-->
+                                        <!--</label>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 text-right">
+                                    <input type="submit" value="Сохранить" class="btn btn-info" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

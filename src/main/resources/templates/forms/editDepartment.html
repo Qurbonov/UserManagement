@@ -1,0 +1,29 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="layout">
+    <div layout:fragment="content">
+        <div class="container">
+            <form method="post" role="form" id="save" th:object="${department}">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <span th:text="${editdepartment}"></span>
+                            <a th:href="@{/departments}" class="pull-right">Назад</a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 form-group">
+                                    <label for="name">Название отдела</label>
+                                    <input type="text" class="form-control" id="name" th:field="*{departmentName}" />
+                                </div>
+
+                                <div class="col-xs-8">
+                                    <input type="submit" value="Сохранить" class="btn btn-info" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

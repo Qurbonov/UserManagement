@@ -1,0 +1,40 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="layout">
+    <div layout:fragment="content">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a th:href="@{modules}">
+                        <h2 th:text="${modules}"></h2>
+                    </a>
+                    <a th:href="@{/modules/new}">
+                        <span class="label label-info">
+                            добавить
+                        </span>
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    <a th:href="@{departments}">
+                        <h2 th:text="${departments}"></h2>
+                    </a>
+                    <a th:href="@{/departments/new}">
+                        <span class="label label-info">
+                            добавить
+                        </span>
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    <a th:href="@{users}">
+                        <h2 th:text="${users}"></h2>
+                    </a>
+                    <a th:href="@{/users/new}">
+                        <span class="label label-info">
+                            добавить
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

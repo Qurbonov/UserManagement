@@ -1,0 +1,56 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="layout" class="bg">
+    <div layout:fragment="content">
+        <div class="container">
+            <h3 th:text="${system}">system_name</h3>
+            <table class="table table-striped table-responsive table-hover">
+                <thead>
+                <tr>
+                    <th colspan="5" class="text-right"><a th:href="@{/home}">Назад</a></th>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Ф.И.О.</th>
+                    <th>Роль</th>
+                    <th>Разрешение</th>
+                    <th>Изменить</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Самандаров Р.</td>
+                    <td>Администратор</td>
+                    <td>
+                        <span class="label label-info">Добавить</span>
+                        <span class="label label-warning">Изменить</span>
+                        <span class="label label-danger">Удалить</span>
+                    </td>
+                    <td><a th:href="@{#}"> Изменить</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                    <td>saasd</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

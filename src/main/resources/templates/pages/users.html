@@ -1,0 +1,57 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorator="layout">
+    <div layout:fragment="content">
+        <div class="container">
+            <h2 th:text="${users}"></h2>
+            <table class="table table-striped table-responsive table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th colspan="4">
+                        <div class="text-right">
+                            <a th:href="@{/users/new}" class="label label-info">добавит</a>
+                            <a th:href="@{/home}"><span class="label label-default">назад</span></a>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>MF_система</th>
+                    <th>Тип</th>
+                    <th>Изменить</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="user : ${allUsers}" th:id="${'user' + user.id}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.userType}"></td>
+
+                    <td>
+                        <a th:href="@{/users/{id}(id=${user.id})}" class="label label-warning">Изменить</a>
+                        <a href="#" th:attr="data-url=@{/users/{id}(id=${user.id})},data-remove='user' + ${user.id}"
+                           class="delete label label-danger">Удалить</a>
+                    </td>
+                </tr>
+
+                <!--<tr>-->
+                <!--<td>1</td>-->
+                <!--<td><a th:href="@{/system}">MFHujjat</a></td>-->
+                <!--<td>-->
+                <!--<a th:href="@{#}" class="label label-warning">Изменить</a>-->
+                <!--<a th:href="@{#}" class="label label-danger">Удалить</a>-->
+                <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>2</td>-->
+                <!--<td><a th:href="@{/system}">UzASBO</a></td>-->
+                <!--<td>-->
+                <!--<a th:href="@{#}" class="label label-warning">Изменить</a>-->
+                <!--<a th:href="@{#}" class="label label-danger">Удалить</a>-->
+                <!--</td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
