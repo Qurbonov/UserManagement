@@ -1,5 +1,7 @@
 package mf.um.controllers;
 
+import mf.um.services.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    UsersService usersService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
@@ -29,6 +34,9 @@ public class HomeController {
 
     @RequestMapping(value = "/userprofile", method = RequestMethod.GET)
     public String userProfile(Model model) {
+        model.addAttribute("userprofile", "Пользователи");
+//        model.addAttribute("allUsers", usersService.findByName("qurbonov"));
+
         return "/pages/userProfile";
     }
 
