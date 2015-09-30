@@ -1,18 +1,13 @@
 package mf.um.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
+import java.security.Principal;
 import java.util.List;
 
 @Entity
 @Table(name = "Users")
-public class Users implements UserDetails, Serializable {
+public class Users implements Serializable, UserDetails, Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -58,7 +53,6 @@ public class Users implements UserDetails, Serializable {
         this.id = id;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }
@@ -67,29 +61,8 @@ public class Users implements UserDetails, Serializable {
         this.username = username;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return isEnabled();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return isEnabled();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return isEnabled();
-    }
-
-    @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("USER"));
     }
 
     public String getPassword() {
@@ -155,5 +128,10 @@ public class Users implements UserDetails, Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getName() {
+        return username;
     }
 }

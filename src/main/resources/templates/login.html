@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>User Management</title>
     <link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" media="screen" />
-    <link th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" rel="stylesheet" media="screen" />
     <link th:href="@{/css/login.css}" href="../static/css/login.css" rel="stylesheet" media="screen" />
     <style>
         body {
@@ -30,7 +30,7 @@
     <div class="row">
         <p th:if="${param.logout}" class="alert alert-success" role="alert">Вы успешно вышли из системы</p>
 
-        <p th:if="${param.error}" class="alert alert-danger" role="alert">Проверьте логин и пароль</p>
+        <p th:if="${param.fail}" class="alert alert-danger" role="alert">Проверьте логин и пароль</p>
 
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -38,13 +38,18 @@
             </div>
             <div class="panel-body">
                 <form name="form" th:action="@{/login}" action="/login" method="POST" class="form-horizontal"
-                      role="form">
+                      role="form" id="login">
+                    <input type="hidden" id="from" name="from" th:value="${param.from[0]}"
+                           th:if="${param.from != null}" />
+                    <input type="hidden" id="sessionId" name="sessionId" th:value="${#httpSession.id}" />
+                    <input type="hidden" id="hash" name="hash" />
+                    <input type="hidden" id="signature" name="signature" />
                     <div class="form-group">
                         <label class="control-label col-sm-2 glyphicon glyphicon-user " for="username"></label>
 
                         <div class="col-sm-10">
                             <input type="username" class="form-control" name="username" id="username"
-                                   placeholder="Enter email" />
+                                   placeholder="Enter login" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -69,5 +74,22 @@
 <div class="navbar navbar-fixed-bottom text-center">
     <h5>ИВЦ, 2015г. </h5>
 </div>
+<script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script src="../static/js/esigner.js" th:src="@{/js/esigner.js}"></script>
+<script>
+    $(function () {
+        $('#login').on('submit', function (e) {
+            var sessionId = $('#sessionId').val();
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var text = username + password;
+            var hash = eSignerDigest(text);
+            var signature = eSignerSign(E_SIGNER_KEY_SOURCE.AUTO, sessionId, hash);
+            $('#hash').val(hash);
+            $('#signature').val(signature);
+            console.log('trying to submit', sessionId, username, password, hash, signature);
+        })
+    });
+</script>
 </body>
 </html>

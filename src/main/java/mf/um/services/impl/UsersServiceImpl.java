@@ -1,21 +1,19 @@
 package mf.um.services.impl;
 
+import mf.um.controllers.Credentials;
 import mf.um.domain.Users;
 import mf.um.repositories.UserRepository;
 import mf.um.services.UsersService;
 import mf.um.spec.UserSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class UsersServiceImpl implements UserDetailsService, UsersService {
+public class UsersServiceImpl implements UsersService {
 
     @Autowired
     public UserRepository userRepository;
@@ -41,11 +39,6 @@ public class UsersServiceImpl implements UserDetailsService, UsersService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return findByName(username);
-    }
-
-    @Override
     public Users save(Users user) {
         return userRepository.save(user);
     }
@@ -54,6 +47,11 @@ public class UsersServiceImpl implements UserDetailsService, UsersService {
     @Transactional
     public void delete(Long userID) {
         userRepository.delete(userID);
+    }
+
+    @Override
+    public Users findUsers(Credentials credentials) {
+        return findByName(credentials.getUsername());
     }
 
 }

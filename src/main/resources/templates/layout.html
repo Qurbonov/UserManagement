@@ -5,12 +5,10 @@
     <title>User Management</title>
     <link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" media="screen" />
     <link th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" rel="stylesheet" media="screen" />
-    <link th:href="@{/css/login.css}" href="../static/css/login.css" rel="stylesheet" media="screen" />
-
     <script src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
     <script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
 </head>
-<body>
+<body class="bg">
 <nav class="navbar navbar-default">
     <div th:class="container-fluid">
         <div class="navbar-header">
@@ -32,7 +30,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle active" data-toggle="dropdown" href="#">
-                        <span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span> <span class="caret"></span>
+                        <span th:inline="text" th:text="${#httpSession.getAttribute('USER_KEY').username}"></span> <span
+                            class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/userprofile}">Профайл</a></li>

@@ -1,5 +1,6 @@
 package mf.um.services;
 
+import mf.um.controllers.Credentials;
 import mf.um.domain.Users;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,4 +21,6 @@ public interface UsersService {
     Users save(Users user);
 
     void delete(Long userID);
+
+    Users findUsers(Credentials credentials);
 }

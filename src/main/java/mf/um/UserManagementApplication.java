@@ -16,12 +16,12 @@ public class UserManagementApplication {
         SpringApplication.run(RootConfig.class, args);
     }
 
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        registrationBean.setFilter(characterEncodingFilter);
-        return registrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean filterRegistrationBean() {
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+//        characterEncodingFilter.setEncoding("UTF-8");
+//        registrationBean.setFilter(characterEncodingFilter);
+//        return registrationBean;
+//    }
 }

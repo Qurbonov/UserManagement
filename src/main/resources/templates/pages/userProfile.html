@@ -18,23 +18,29 @@
                 <!--</tr>-->
                 <tr>
                     <th>ID</th>
+                    <th>Ф.И.О.</th>
+                    <th>Логин</th>
                     <th>MF_система</th>
+                    <th>Департамент</th>
                     <th>Тип</th>
-                    <th>Изменить</th>
+                    <!--<th>Изменить</th>-->
                 </tr>
                 </thead>
                 <tbody>
 
                 <tr th:each="user : ${allUsers}" th:id="${'user' + user.id}">
                     <td th:text="${user.id}"></td>
+                    <td><span th:text="${user.firstname}"></span> <span th:text="${user.lastname}"></span></td>
                     <td th:text="${user.username}"></td>
+                    <td th:text="${user.module}"></td>
+                    <td th:text="${user.department}"></td>
                     <td th:text="${user.userType}"></td>
 
-                    <td>
-                        <a th:href="@{/users/{id}(id=${user.id})}" class="label label-warning">Изменить</a>
-                        <a href="#" th:attr="data-url=@{/users/{id}(id=${user.id})},data-remove='user' + ${user.id}"
-                           class="delete label label-danger">Удалить</a>
-                    </td>
+                    <!--<td>-->
+                    <!--<a th:href="@{/users/{id}(id=${user.id})}" class="label label-warning">Изменить</a>-->
+                    <!--<a href="#" th:attr="data-url=@{/users/{id}(id=${user.id})},data-remove='user' + ${user.id}"-->
+                    <!--class="delete label label-danger">Удалить</a>-->
+                    <!--</td>-->
                 </tr>
 
                 <!--<tr>-->

@@ -1,3 +1,6 @@
+.bg {
+    background: url('../img/1.png') repeat-x, repeat-y;
+}
 button {
     margin-bottom: 10px;
 }
