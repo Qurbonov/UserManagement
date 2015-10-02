@@ -16,7 +16,7 @@ import java.security.Principal;
 public class PrincipalArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return Principal.class.isAssignableFrom(parameter.getParameterType());
+        return Principal.class.equals(parameter.getParameterType());
     }
 
     @Override

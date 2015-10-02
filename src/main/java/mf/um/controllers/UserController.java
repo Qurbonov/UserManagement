@@ -1,16 +1,15 @@
 package mf.um.controllers;
 
 import mf.um.domain.Users;
+import mf.um.services.ModuleService;
 import mf.um.services.UsersService;
+import mf.um.services.impl.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by qurbonov on 9/2/2015.
@@ -19,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
     @Autowired
     UsersService usersService;
+    @Autowired
+    ModuleService moduleService;
 
     //manage users
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -30,13 +31,16 @@ public class UserController {
 
     @RequestMapping(value = "/users/new", method = RequestMethod.GET)
     public String adduser(Model model) {
-        model.addAttribute("user", new Users());
         model.addAttribute("adduser", "Добавить пользователя");
+        Users user = new Users();
+        user.setUsername("default");
+        model.addAttribute("user", user);
+        model.addAttribute("availableModules", moduleService.findAll());
         return "forms/addUser";
     }
 
     @RequestMapping(value = "/users/new", method = RequestMethod.POST)
-    public String saveUser(Users user) {
+    public String saveUser(@ModelAttribute("user") Users user) {
         user = usersService.save(user);
         return "redirect:/users/";
     }
@@ -48,19 +52,10 @@ public class UserController {
         return "forms/editUser";
     }
 
-//    //edit module Form
-//    @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
-//    public String editmodule(@PathVariable Long userId, Model model) {
-//        model.addAttribute("user", usersService.findOne(userId));
-//        model.addAttribute("edituser", "Редактировать");
-//        return "forms/editUser";
-//    }
-
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.POST)
     public String edit(@PathVariable Long userId, Model model, Users users) {
-
         users.setId(userId);
-        model.addAttribute("module", usersService.save(users));
+        model.addAttribute("user", usersService.save(users));
         model.addAttribute("adduser", "Добавить пользователя");
         return "redirect:/users/";
     }

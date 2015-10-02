@@ -37,9 +37,16 @@
                                 </div>
 
                                 <div class="col-xs-12 form-group">
-                                    <label for="modulename">Название модуля</label>
-                                    <input type="text" class="form-control" id="modulename" th:field="*{module}" />
+                                    <div class="form-group">
+                                        <label for="modulename">Название модуля</label>
+                                        <select multiple="multiple" class="form-control" id="modulename"
+                                                th:field="*{modules}">
+                                            <option th:each="module : ${availableModules}"
+                                                    th:text="${module.moduleName}" th:value="${module.id}"></option>
+                                        </select>
+                                    </div>
                                 </div>
+
                                 <div class="col-xs-6 form-group">
                                     <label for="userType">Тип</label>
 

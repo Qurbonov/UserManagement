@@ -52,7 +52,6 @@ public class DepartmentController {
 
     @RequestMapping(value = "/departments/{departmentId}", method = RequestMethod.POST)
     public String edit(@PathVariable Long departmentId, Model model, Department department) {
-
         department.setId(departmentId);
         model.addAttribute("department", departmentService.save(department));
         model.addAttribute("addDepartment", "Добавить модул");

@@ -1,3 +1,9 @@
 .bg {
-    background: url('../img/3.png') repeat-x, repeat-y;
+    background: url('../img/3.jpg');
+}
+
+.mytab {
+    background-color: #fff;
+    border-radius: 20px;
+
 }

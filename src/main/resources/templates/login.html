@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -44,6 +43,7 @@
                     <input type="hidden" id="sessionId" name="sessionId" th:value="${#httpSession.id}" />
                     <input type="hidden" id="hash" name="hash" />
                     <input type="hidden" id="signature" name="signature" />
+
                     <div class="form-group">
                         <label class="control-label col-sm-2 glyphicon glyphicon-user " for="username"></label>
 
@@ -87,6 +87,11 @@
             var signature = eSignerSign(E_SIGNER_KEY_SOURCE.AUTO, sessionId, hash);
             $('#hash').val(hash);
             $('#signature').val(signature);
+
+            if (eSignerFailed) {
+                console.log("error ");
+                jAlert('This is a custom alert box', 'Alert Dialog');
+            }
             console.log('trying to submit', sessionId, username, password, hash, signature);
         })
     });

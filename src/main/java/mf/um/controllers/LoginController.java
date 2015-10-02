@@ -28,7 +28,6 @@ public class LoginController {
     public String loginProcess(HttpServletRequest request, Credentials credentials) {
         HttpSession session = request.getSession();
         String from = request.getParameter("from");
-        System.out.println("User Login Successful");
         Users users = usersService.findUsers(credentials);
         if (users != null && users.isEnabled()) {
             session.setAttribute(LoginFilter.USER_KEY, users);
