@@ -27,9 +27,8 @@
 
                     <td>
                         <a th:href="@{/modules/{id}(id=${module.id})}" class="label label-warning">Изменить</a>
-                        <!--<a th:href="@{/modules/delete/{id}(id=${module.id})}" class="label label-danger">Удалить</a>-->
                         <a href="#"
-                           th:attr="data-url=@{/modules/{id}(id=${module.id})},data-remove='module' + ${module.id}"
+                           th:attr="data-url=@{/modules/{id}(id=${module.id})}, data-remove='module' + ${module.id}"
                            class="delete label label-danger">Удалить</a>
                     </td>
                 </tr>

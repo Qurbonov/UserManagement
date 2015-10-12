@@ -88,12 +88,8 @@
             $('#hash').val(hash);
             $('#signature').val(signature);
 
-            if (eSignerFailed) {
-                console.log("error ");
-                jAlert('This is a custom alert box', 'Alert Dialog');
-            }
             console.log('trying to submit', sessionId, username, password, hash, signature);
-        })
+        });
     });
 </script>
 </body>

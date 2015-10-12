@@ -33,48 +33,41 @@
 
                                 <div class="col-xs-12 form-group">
                                     <label for="department">Отдел</label>
-                                    <input type="text" class="form-control" id="department" th:field="*{department}" />
+                                    <select id="department" class="form-control" th:field="*{department}">
+                                        <option th:each="dept : ${availableDepartments}"
+                                                th:text="${dept.departmentName}" th:value="${dept.id}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-12 form-group">
+                                    <label for="modulename">Название модуля</label>
+                                    <select multiple="multiple" class="form-control" id="modulename"
+                                            th:field="*{modules}">
+                                        <option th:each="module : ${availableModules}" th:text="${module.moduleName}"
+                                                th:value="${module.id}"></option>
+                                    </select>
+
                                 </div>
 
                                 <div class="col-xs-12 form-group">
-                                    <div class="form-group">
-                                        <label for="modulename">Название модуля</label>
-                                        <select multiple="multiple" class="form-control" id="modulename"
-                                                th:field="*{modules}">
-                                            <option th:each="module : ${availableModules}"
-                                                    th:text="${module.moduleName}" th:value="${module.id}"></option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-6 form-group">
                                     <label for="userType">Тип</label>
 
                                     <div class="col-xs-12 input-group">
-                                        <select id="userType" class="form-control" th:field="*{userType}">
-                                            <option value="Администратор">Администратор</option>
-                                            <option value="Пользователь">Пользователь</option>
+                                        <select id="userType" class="form-control" th:field="*{roles}">
+                                            <option th:each="role : ${availableRoles}" th:text="${role.roleName}"
+                                                    th:value="${role.id}"></option>
                                         </select>
+                                    </div>
 
-                                        <!--<div class="col-xs-6 form-group">-->
-                                        <!--<div class="checkbox thumbnail text-center">-->
-                                        <!--<label>-->
-                                        <!--<input type="checkbox" value="" name="admin" id="admin"/>-->
-                                        <!--Администратор-->
-                                        <!--</label>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="col-xs-6 form-group">-->
-                                        <!--<div class="checkbox thumbnail text-center">-->
-                                        <!--<label>-->
-                                        <!--<input type="checkbox" value="" />-->
-                                        <!--Пользователь-->
-                                        <!--</label>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    <label class="control-label">ЭЦП </label>
+
+                                    <div class="col-xs-12">
+                                        <input id="input-1a" type="file" class="file" />
                                     </div>
                                 </div>
+
                                 <div class="col-xs-12 text-right">
                                     <input type="submit" value="Сохранить" class="btn btn-info" />
                                 </div>

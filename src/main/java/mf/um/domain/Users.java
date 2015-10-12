@@ -21,20 +21,29 @@ public class Users implements Serializable, UserDetails, Principal {
     @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "department")
-    private String department;
+    //    @Column(name = "department")
+    @ManyToMany
+    private List<Department> department;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "module")
-    private String module;
+    //@Column(name = "module")
+    //private String module;
 
-    @Column(name = "usertype")
-    private String userType;
+    //@Column(name = "usertype")
+    //private String userType;
 
     @ManyToMany
     private List<Module> modules;
+
+    @ManyToMany
+    private List<Role> roles;
+
+    @ManyToMany
+    @Column(name = "permissions")
+    private List<Permission> permissions;
+
 
     public Users() {
     }
@@ -73,6 +82,8 @@ public class Users implements Serializable, UserDetails, Principal {
         this.password = password;
     }
 
+//----------------------------------------------------------------------------------------------
+
     public List<Module> getModules() {
         return modules;
     }
@@ -81,13 +92,31 @@ public class Users implements Serializable, UserDetails, Principal {
         this.modules = modules;
     }
 
-    public String getModule() {
-        return module;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setModule(String module) {
-        this.module = module;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+//-----------------------------------------------------------------------------------------------
+
+//    public String getModule() {
+//        return module;
+//    }
+//
+//    public void setModule(String module) {
+//        this.module = module;
+//    }
 
     public String getFirstname() {
         return firstname;
@@ -105,21 +134,21 @@ public class Users implements Serializable, UserDetails, Principal {
         this.lastname = lastname;
     }
 
-    public String getDepartment() {
+    public List<Department> getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(List<Department> department) {
         this.department = department;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
+//    public String getUserType() {
+//        return userType;
+//    }
+//
+//    public void setUserType(String userType) {
+//        this.userType = userType;
+//    }
 
     @Override
     public String toString() {

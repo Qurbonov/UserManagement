@@ -6,7 +6,7 @@
             <table class="table table-bordered table-striped table-responsive table-hover mytab">
                 <thead>
                 <tr>
-                    <th colspan="4">
+                    <th colspan="6">
                         <div class="text-right">
                             <a th:href="@{/users/new}" class="label label-info">добавит</a>
                             <a th:href="@{/home}"><span class="label label-default">назад</span></a>
@@ -15,7 +15,9 @@
                 </tr>
                 <tr>
                     <th>ID</th>
-                    <th>MF_система</th>
+                    <th>Логин</th>
+                    <th>Отдел</th>
+                    <th>Система</th>
                     <th>Тип</th>
                     <th>Изменить</th>
                 </tr>
@@ -24,11 +26,18 @@
                 <tr th:each="user : ${allUsers}" th:id="${'user' + user.id}">
                     <td th:text="${user.id}"></td>
                     <td th:text="${user.username}"></td>
-                    <td th:text="${user.userType}"></td>
-
+                    <td>
+                        <span th:each="dept : ${user.department}"><p th:text="${dept.departmentName}"></p></span>
+                    </td>
+                    <td>
+                        <span th:each="module : ${user.modules}"><p th:text="${module.moduleName}"></p></span>
+                    </td>
+                    <td>
+                        <span th:each="role : ${user.roles}"><p th:text="${role.roleName}"></p></span>
+                    </td>
                     <td>
                         <a th:href="@{/users/{id}(id=${user.id})}" class="label label-warning">Изменить</a>
-                        <a href="#" th:attr="data-url=@{/users/{id}(id=${user.id})},data-remove='user' + ${user.id}"
+                        <a href="#" th:attr="data-url=@{/users/{id}(id=${user.id})}, data-remove='user' + ${user.id}"
                            class="delete label label-danger">Удалить</a>
                     </td>
                 </tr>

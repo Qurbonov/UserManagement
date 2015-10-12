@@ -43,6 +43,11 @@ public class UsersServiceImpl implements UsersService {
         return userRepository.save(user);
     }
 
+    //    @Override
+    public Users save(String username, Users user) {
+        return userRepository.save(user);
+    }
+
     @Override
     @Transactional
     public void delete(Long userID) {

@@ -73,6 +73,7 @@ public class ModuleController implements ErrorController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
     @Override
     public String getErrorPath() {
         return "/error";
