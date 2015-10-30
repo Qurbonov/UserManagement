@@ -32,15 +32,17 @@
                                 </div>
 
                                 <div class="col-xs-12 form-group">
-                                    <label for="department">Отдел</label>
-                                    <select id="department" class="form-control" th:field="*{department}">
+                                    <!--<label for="department">Отдел</label>-->
+                                    <select id="department" th:field="*{department}" class="form-control selectpicker"
+                                            data-style="btn-inverse" title="Выберите тип пользователя...">
                                         <option th:each="dept : ${availableDepartments}"
                                                 th:text="${dept.departmentName}" th:value="${dept.id}"></option>
                                     </select>
                                 </div>
                                 <div class="col-xs-12 form-group">
-                                    <label for="modulename">Название модуля</label>
-                                    <select multiple="multiple" class="form-control" id="modulename"
+                                    <!--<label for="modulename">Название модуля</label>-->
+                                    <select multiple="multiple" class="form-control selectpicker"
+                                            data-style="btn-inverse" title='Выберите модуля...' id="modulename"
                                             th:field="*{modules}">
                                         <option th:each="module : ${availableModules}" th:text="${module.moduleName}"
                                                 th:value="${module.id}"></option>
@@ -49,10 +51,10 @@
                                 </div>
 
                                 <div class="col-xs-12 form-group">
-                                    <label for="userType">Тип</label>
-
+                                    <!--<label for="userType">Тип</label>-->
                                     <div class="col-xs-12 input-group">
-                                        <select id="userType" class="form-control" th:field="*{roles}">
+                                        <select id="userType" class="form-control selectpicker" data-style="btn-inverse"
+                                                title="Выберите тип пользователя..." th:field="*{roles}">
                                             <option th:each="role : ${availableRoles}" th:text="${role.roleName}"
                                                     th:value="${role.id}"></option>
                                         </select>
@@ -60,13 +62,13 @@
 
                                 </div>
 
-                                <div class="col-xs-12 form-group">
-                                    <label class="control-label">ЭЦП </label>
+                                <!--<div class="col-xs-12 form-group">-->
+                                <!--<label class="control-label">ЭЦП </label>-->
 
-                                    <div class="col-xs-12">
-                                        <input id="input-1a" type="file" class="file" />
-                                    </div>
-                                </div>
+                                <!--<div class="col-xs-13">-->
+                                <!--<input id="input-1a" type="file" class="file" />-->
+                                <!--</div>-->
+                                <!--</div>-->
 
                                 <div class="col-xs-12 text-right">
                                     <input type="submit" value="Сохранить" class="btn btn-info" />

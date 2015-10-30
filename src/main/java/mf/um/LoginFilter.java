@@ -18,7 +18,7 @@ import java.util.List;
 public class LoginFilter implements Filter {
     public static final String USER_KEY = "USER_KEY";
     private static List<String> publicUrls = Arrays.asList(
-            "/login", "/css/", "/fonts/", "/img/", "/js/", "/logout"
+            "/login", "/css/", "/fonts/", "/img/", "/js/", "/logout", "/api/dvs"
     );
     private ApplicationContext context;
 

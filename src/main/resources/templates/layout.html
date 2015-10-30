@@ -6,9 +6,13 @@
     <link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" media="screen" />
     <link th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" rel="stylesheet" media="screen" />
     <link th:href="@{/css/fileinput.css}" href="../static/css/fileinput.css" rel="stylesheet" media="screen" />
+    <link th:href="@{/css/bootstrap-select.css}" href="../static/css/bootstrap-select.css" rel="stylesheet"
+          media="screen" />
+
     <script src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
     <script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
     <script src="/js/fileinput.js" th:src="@{/js/fileinput.js}"></script>
+    <script src="/js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
 </head>
 <body class="bg">
 <nav class="navbar navbar-default">
@@ -59,7 +63,7 @@
 <div class="container-fluid">
     <div layout:fragment="content"></div>
 </div>
-<div class="navbar-fixed-bottom text-center text-info panel panel-footer">
+<div class="navbar-fixed-bottom text-center text-info ">
     <a href="http://localhost:8090/api/dvs" target="_blank">DVC API</a>
 </div>
 <script>
