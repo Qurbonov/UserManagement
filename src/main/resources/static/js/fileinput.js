@@ -2,20 +2,35 @@
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
  * @version 4.2.8
  *
- * File input styled for Bootstrap 3.0 that utilizes HTML5 File Input's advanced
- * features including the FileReader API.
- *
+ * File input styled for Bootstrap 3.0 that utilizes HTML5 File Input's advanced 
+ * features including the FileReader API. 
+ * 
  * The plugin drastically enhances the HTML file input to preview multiple files on the client before
- * upload. In addition it provides the ability to preview content of images, text, videos, audio, html,
- * flash and other objects. It also offers the ability to upload and delete files using AJAX, and add
+ * upload. In addition it provides the ability to preview content of images, text, videos, audio, html, 
+ * flash and other objects. It also offers the ability to upload and delete files using AJAX, and add 
  * files in batches (i.e. preview, append, or remove before upload).
- *
+ * 
  * Author: Kartik Visweswaran
  * Copyright: 2015, Kartik Visweswaran, Krajee.com
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
-(function ($) {
+(function (factory) {
+    "use strict";
+    if (typeof define === 'function' && define.amd) { // jshint ignore:line
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory); // jshint ignore:line
+    } else { // noinspection JSUnresolvedVariable
+        if (typeof module === 'object' && module.exports) { // jshint ignore:line
+            // Node/CommonJS
+            // noinspection JSUnresolvedVariable
+            module.exports = factory(require('jquery')); // jshint ignore:line
+        } else {
+            // Browser globals
+            factory(window.jQuery);
+        }
+    }
+}(function ($) {
     "use strict";
 
     $.fn.fileinputLocales = {};
@@ -278,9 +293,9 @@
     '<div class="input-group {class}">\n' +
     '   {caption}\n' +
     '   <div class="input-group-btn">\n' +
-    '       {remove}\n' +
+        //'       {remove}\n' +
     '       {cancel}\n' +
-    '       {upload}\n' +
+        //'       {upload}\n' +
     '       {browse}\n' +
     '   </div>\n' +
     '</div>';
@@ -300,9 +315,10 @@
     tCaption = '<div tabindex="500" class="form-control file-caption {class}">\n' +
     '   <div class="file-caption-name"></div>\n' +
     '</div>\n';
-    tBtnDefault = '<button type="{type}" tabindex="500" title="{title}" class="{css}"{status}>{icon}{label}</button>';
-    tBtnLink = '<a href="{href}" tabindex="500" title="{title}" class="{css}"{status}>{icon}{label}</a>';
-    tBtnBrowse = '<div tabindex="500" class="{css}"{status}>{icon}{label}</div>';
+    //noinspection HtmlUnknownAttribute
+    tBtnDefault = '<button type="{type}" tabindex="500" title="{title}" class="{css}" {status}>{icon}{label}</button>';
+    tBtnLink = '<a href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon}{label}</a>';
+    tBtnBrowse = '<div tabindex="500" class="{css}" {status}>{icon}{label}</div>';
     tModal = '<div id="{id}" class="file-preview-detail-modal modal fade" tabindex="-1">\n' +
     '  <div class="modal-dialog modal-lg">\n' +
     '    <div class="modal-content">\n' +
@@ -498,6 +514,7 @@
         });
         return out;
     };
+    //noinspection JSUnresolvedVariable
     objUrl = window.URL || window.webkitURL;
     FileInput = function (element, options) {
         var self = this;
@@ -1532,7 +1549,6 @@
                         }
                         self.raise('fileuploaded', [outData, previewId, i]);
                         if (!allFiles) {
-                            self.resetFileStack();
                             self.updateStack(i, undefined);
                         } else {
                             updateUploadLog(i, previewId);
@@ -2452,7 +2468,7 @@
                 .replace(/\{preview}/g, preview)
                 .replace(/\{close}/g, close)
                 .replace(/\{caption}/g, caption)
-                //.replace(/\{upload}/g, self.renderButton('upload'))
+                .replace(/\{upload}/g, self.renderButton('upload'))
                 .replace(/\{remove}/g, self.renderButton('remove'))
                 .replace(/\{cancel}/g, self.renderButton('cancel'))
                 .replace(/\{browse}/g, self.renderButton('browse'));
@@ -2630,12 +2646,12 @@
     $.fn.fileinputLocales.en = {
         fileSingle: 'file',
         filePlural: 'files',
-        browseLabel: 'Файл &hellip;',
-        removeLabel: 'O\'chirish',
+        browseLabel: 'Browse &hellip;',
+        removeLabel: 'Remove',
         removeTitle: 'Clear selected files',
         cancelLabel: 'Cancel',
         cancelTitle: 'Abort ongoing upload',
-        uploadLabel: 'Yuklash',
+        uploadLabel: 'Upload',
         uploadTitle: 'Upload selected files',
         msgZoomTitle: 'View details',
         msgZoomModalHeading: 'Detailed Preview',
@@ -2678,5 +2694,4 @@
             $input.fileinput();
         }
     });
-})
-(window.jQuery);
+}));
