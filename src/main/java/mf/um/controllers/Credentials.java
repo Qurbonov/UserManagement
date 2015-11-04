@@ -8,6 +8,7 @@ public class Credentials {
     private String password;
     private String hash;
     private String signature;
+//    private String usertype;
 
     public String getUsername() {
         return username;
@@ -40,4 +41,12 @@ public class Credentials {
     public void setSignature(String signature) {
         this.signature = signature;
     }
+
+//    public String getUsertype() {
+//        return usertype;
+//    }
+//
+//    public void setUsertype(String usertype) {
+//        this.usertype = usertype;
+//    }
 }
