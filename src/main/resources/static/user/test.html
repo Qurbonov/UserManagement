@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-file-model/angular-file-model.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload-all.js"></script>
+
+    <script>
+        var app = angular.module('myApp', ['ngResource','file-model','ngFileUpload']);
+        
+
+        app.factory("Post", function ($resource) {
+            return $resource("http://localhost:8081/api/eds");
+        });
+
+
+        app.controller("PostIndexCtrl", function ($scope, Post) {
+            Post.query(function (data) {
+                $scope.posts = data;
+            });
+        });
+
+        app.controller("HttpController", ['$scope', '$resource',
+            function ($scope, $resource) {
+                $scope.datas = [{}];
+
+                $scope.saveUser = function () {
+                    $scope.datas.push({
+                        'id': $scope.id,
+                        'edsname': $scope.edsname
+                    });
+                    // Create a resource class object
+                    //
+                    var url = $resource('/user/new1');
+                    // Call action method (save) on the class
+                    //
+                    url.save({
+                        id: $scope.id,
+                        edsname: $scope.edsname
+                    }, function (response) {
+                        $scope.message = response.message;
+                    });
+
+                    $scope.id = '';
+                    $scope.EDSName = '';
+                }
+            }]);
+        app.controller('fileCtrl', function ($scope, $http, $resource) {
+            $scope.file = null;
+            console.log("rest is offline1");
+            $scope.$watch('file', function (newVal) {
+                console.log("rest is offline2");
+                console.log(newVal);
+                if (newVal) {
+                    var reader = new FileReader();
+                    console.log("rest is offline3");
+                    reader.onload = function (evt) {
+                        var content = evt.target.result;
+                        var res = $http.post('/user/new1', content);
+                        console.log(content);
+                        res.success(function (content, status) {
+                            $scope.message = content;
+                            console.log(content);
+                        });
+                        res.error(function (content, status) {
+                            console.log(" -----failure message:----- " + JSON.stringify({content: content}) );
+                        });
+                    };
+                    reader.readAsBinaryString(newVal);
+                }
+            })
+        });
+
+        app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+            $scope.uploadPic = function(file) {
+
+                file.upload = Upload.upload({
+                    url: '/user/new1',
+                    data: {file: file, username: $scope.username}
+
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    // Math.min is to fix IE which reports 200% sometimes
+                    file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                });
+            }
+        }]);
+
+
+
+
+
+    </script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="HttpController">
+    <form class="form-horizontal" role="form" ng-submit="saveUser()">
+        <div class="form-group">
+            <label class="col-md-4 control-label">First Name</label>
+
+            <div class="col-md-5">
+                <input type="number" class="form-control" ng-model="id" pattern="\d*" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Last Name</label>
+
+            <div class="col-md-5">
+                <input type="text" class="form-control" ng-model="edsname" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div style="padding-left:200px">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </form>
+</div>
+<div ng-controller='fileCtrl'>
+    <form>
+        <input type='file' file-model='file' />
+    </form>
+    <p ng-if='file'>
+        The name of your file is <b>{{ file.name }}</b> and the size is of <b>{{ file.size }} </b> bytes. </p>
+
+    <!--<p ng-if='file'>-->
+        <!--If you want to have something like ngChange the best way ATM is to use a $scope.$watch over the variable you pass to file-model just like in this code.-->
+    <!--</p>-->
+</div>
+
+<div ng-controller="PostIndexCtrl">
+    <table>
+        <tr ng-repeat="d in posts">
+            <td>{{d.id}}</td>
+            <td>{{d.edsname}}</td>
+        </tr>
+    </table>
+</div>
+
+<hr />
+<div ng-controller="MyCtrl">
+<form name="myForm">
+    <fieldset>
+        <legend>Upload on form submit</legend>
+        Username:
+        <input type="text" name="userName" ng-model="username" size="31" required>
+        <i ng-show="myForm.userName.$error.required">*required</i>
+        <br>Photo:
+        <input type="file" ngf-select ng-model="picFile" name="file"
+               accept="image/*" ngf-max-size="2MB" required>
+        <i ng-show="myForm.file.$error.required">*required</i><br>
+        <i ng-show="myForm.file.$error.maxSize">File too large
+                                                {{picFile.size / 1000000|number:1}}MB: max 2M</i>
+        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+        <br>
+        <button ng-disabled="!myForm.$valid"
+                ng-click="uploadPic(picFile)">Submit</button>
+      <span class="progress" ng-show="picFile.progress >= 0">
+        <div style="width:{{picFile.progress}}%"
+             ng-bind="picFile.progress + '%'"></div>
+      </span>
+        <span ng-show="picFile.result">Upload Successful</span>
+        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+    </fieldset>
+    <br>
+</form>
+</div>
+</body>
+</html>

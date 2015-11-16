@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>Upload </title>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-file-model/angular-file-model.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload-all.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="js/fileinput.js"></script>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/fileinput.css" />
+    <script>
+        var app = angular.module('myApp', ['ngResource', 'file-model', 'ngFileUpload']);
+        app.controller('fileCtrl', function ($scope, $http, $resource) {
+            $scope.file = null;
+//            console.log("rest is offline1");
+            $scope.$watch('file', function (newVal) {
+//                console.log("rest is offline2");
+//                console.log(newVal);
+                if (newVal) {
+                    var reader = new FileReader();
+//                    console.log("rest is offline3");
+                    reader.onload = function (evt) {
+                        var content = evt.target.result;
+                        console.log(newVal.name)
+                        var fileName = newVal.name
+//                        console.log(content);
+                        var res = $http.post('/user/new1', {content:content, fileName:fileName});
+//                        var res = $http.post('/user/new1', content, fileName);
+//                        console.log(content);
+                        res.success(function (content, status) {
+                            $scope.message = content;
+//                            console.log(content);
+                        });
+                        res.error(function (content, status) {
+//                            console.log(" -----failure message:----- " + JSON.stringify({content: content}));
+                        });
+                    };
+                    reader.readAsBinaryString(newVal);
+                }
+            })
+        });
+    </script>
+    <script>
+        $(document).on('ready', function () {
+            $("#input-22").fileinput({
+                previewFileType: "text",
+//                allowedFileExtensions: ["txt", "md", "ini", "text"],
+                previewClass: "bg-warning"
+            });
+        });
+    </script>
+</head>
+<body ng-app="myApp">
+
+<div class="jumbotron text-center"><h1>upload</h1></div>
+
+<div ng-controller='fileCtrl'>
+
+    <form>
+        <input type='file' file-model='file' class="file" />
+    </form>
+    <p ng-if='file'>
+        The name of your file is <b>{{ file.name }}</b> and the size is of <b>{{ file.size }} </b> bytes. </p>
+    <!--<p ng-if='file'>-->
+    <!--If you want to have something like ngChange the best way ATM is to use a $scope.$watch over the variable you pass to file-model just like in this code.-->
+    </p>
+</div>
+
+<!--<label class="control-label">Select File</label>-->
+<!--<input id="input-20" type="file" class="file-loading">-->
+
+</body>
+</html>

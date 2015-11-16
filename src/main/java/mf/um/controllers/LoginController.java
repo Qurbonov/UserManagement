@@ -32,37 +32,27 @@ public class LoginController {
         String from = request.getParameter("from");
         Users users = usersService.findUsers(credentials);
 
-/*
-test
-        asdas
-//*/
-//        List d = users.getRoles();
-//        System.out.println("d " + d.toString());
-//        String adm = "redirect:/home";
-//        String user = "redirect:/user/index.html#/";
-//        for (Role role : users.getRoles()) {
-//            if (role.getId() == 1) {
-//                adm = "redirect:/home";
-//            }
-//            if (role.getId() == 1) {
-//                user = "redirect:/user/index.html#/";
-//            }
-//        }
-        Role o = users.getRoles().get(0);
-        Long d = o.getId();
+        if (users == null){
+            return "redirect:/login?fail=1";
+        }
+
+        Role role = users.getRoles().get(0);
+        Long roleID = role.getId();
+
         if (users != null && users.isEnabled()) {
             session.setAttribute(LoginFilter.USER_KEY, users);
             String url = from;
             if (url == null || url.isEmpty()) {
                 url = "/home";
             }
-            if (d == 1) {
+            if (roleID == 1) {
                 return "redirect:/home";
-            } else if (d == 2) {
+            } else if (roleID == 2) {
                 return "redirect:/user/index.html#/";
             }
         } else {
             String url = "redirect:/login?fail=1";
+
             if (from != null && !from.isEmpty()) {
                 url = url + "&from=" + from;
             }

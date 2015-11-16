@@ -1,0 +1,26 @@
+<div ng-controller="userCtrl">
+
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>department</th>
+            <th>module</th>
+            <th>role</th>
+            <th>enabled</th>
+        </tr>
+        <tr ng-repeat="d in data">
+            <td>{{d.id}}</td>
+            <td>{{d.username}}</td>
+            <td>{{d.firstname}}</td>
+            <td>{{d.lastname}}</td>
+            <td>{{d.department[0].departmentName}}</td>
+            <td>{{d.modules[0].moduleName}}</td>
+            <td>{{d.roles[0].roleName}}</td>
+            <td>{{d.enabled}}</td>
+        </tr>
+    </table>
+
+</div>

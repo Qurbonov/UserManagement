@@ -1,0 +1,12 @@
+<div ng-controller='fileCtrl'>
+    <form>
+        <input type='file' file-model='file'>
+    </form>
+    <p ng-if='file'>
+        The name of your file is {{ file.name }} and the size is of {{ file.size }} bytes.
+    </p>
+
+    <p ng-if='file'>
+        If you want to have something like ngChange the best way ATM is to use a $scope.$watch over the variable you pass to file-model just like in this code.
+    </p>
+</div>

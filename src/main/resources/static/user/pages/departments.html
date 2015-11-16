@@ -1,0 +1,16 @@
+<div ng-controller="departmentCtrl">
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+
+        </tr>
+        <tr ng-repeat="d in dept">
+            <td>{{d.id}}</td>
+            <td>{{d.departmentName}}</td>
+
+        </tr>
+    </table>
+
+</div>
